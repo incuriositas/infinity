@@ -8,11 +8,11 @@ from score.models import Score
 
 
 def index(request):
-    template = loader.get_template('main/index.html')
-    context = {
-        'latest_question_list': "test",
-    }
-    return HttpResponse(template.render(context, request))
+    # template = loader.get_template('main/index.html')
+    # context = {
+    #     'latest_question_list': "test",
+    # }
+    return render(request, 'main/index.html', {'username': request.user})
 
 
 def problem1(request):
@@ -46,9 +46,9 @@ def problem1(request):
 
             return HttpResponseRedirect('/main/problem1')
         else:
-            return render(request, 'main/problem1.html', {'score': p1.score, 'flag': "오답입니다"})
+            return render(request, 'main/problem1.html', {'score': p1.score, 'flag': "오답입니다", 'username': request.user})
 
-    return render(request, 'main/problem1.html', {'score': p1.score})
+    return render(request, 'main/problem1.html', {'score': p1.score, 'username': request.user})
 
 
 def problem2(request):
@@ -75,9 +75,9 @@ def problem2(request):
 
             return HttpResponseRedirect('/main/problem2')
         else:
-            return render(request, 'main/problem2.html', {'score': p2.score, 'flag': "오답입니다"})
+            return render(request, 'main/problem2.html', {'score': p2.score, 'flag': "오답입니다", 'username': request.user})
 
-    return render(request, 'main/problem2.html', {'score': p2.score})
+    return render(request, 'main/problem2.html', {'score': p2.score, 'username': request.user})
 
 
 def problem3(request):
@@ -104,9 +104,9 @@ def problem3(request):
 
             return HttpResponseRedirect('/main/problem3')
         else:
-            return render(request, 'main/problem3.html', {'score': p3_info.score, 'flag': "오답입니다"})
+            return render(request, 'main/problem3.html', {'score': p3_info.score, 'flag': "오답입니다", 'username': request.user})
 
-    return render(request, 'main/problem3.html', {'score': p3_info.score})
+    return render(request, 'main/problem3.html', {'score': p3_info.score, 'username': request.user})
 
 
 def problem4(request):
@@ -132,9 +132,9 @@ def problem4(request):
             print(my_score)
             return HttpResponseRedirect('/main/problem4')
         else:
-            return render(request, 'main/problem4.html', {'score': p4_info.score, 'flag': "오답입니다"})
+            return render(request, 'main/problem4.html', {'score': p4_info.score, 'flag': "오답입니다", 'username': request.user})
 
-    return render(request, 'main/problem4.html', {'score': p4_info.score})
+    return render(request, 'main/problem4.html', {'score': p4_info.score, 'username': request.user})
 
 
 def problem5(request):
@@ -160,6 +160,6 @@ def problem5(request):
             print(my_score)
             return HttpResponseRedirect('/main/problem5')
         else:
-            return render(request, 'main/problem5.html', {'score': p5_info.score, 'flag': "오답입니다"})
+            return render(request, 'main/problem5.html', {'score': p5_info.score, 'flag': "오답입니다", 'username': request.user})
 
-    return render(request, 'main/problem5.html', {'score': p5_info.score})
+    return render(request, 'main/problem5.html', {'score': p5_info.score, 'username': request.user})
