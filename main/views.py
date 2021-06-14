@@ -15,14 +15,6 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
-def score(request):
-    template = loader.get_template('main/tables.html')
-    context = {
-        'latest_question_list': "test",
-    }
-    return HttpResponse(template.render(context, request))
-
-
 def problem1(request):
     p1_info = Problem.objects.filter(num=1)
     p1 = p1_info[0]
