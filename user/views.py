@@ -12,7 +12,7 @@ def signup(request):
                 username=request.POST['username'],
                 password=request.POST['password1']
             )
-            auth.login(request, user)
+            auth.login(request, user)   
             return redirect('/')
         return render(request, 'user/regiter.html')
     return render(request, 'user/register.html')

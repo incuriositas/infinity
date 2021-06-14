@@ -105,7 +105,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">문제 점수표시(200점)</h1>
+                    <h1 class="h3 mb-4 text-gray-800">{{score}}점</h1>
 
                     <div class="row">
 
@@ -135,6 +135,30 @@
 
                         <div class="col-lg-6">
                             <!-- Brand Buttons -->
+                            {% if messages %}
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Complete!!</h6>
+                                </div>
+                                <div class="card-body">
+                                    {% for message in messages %}
+                                    <div class="alert {{ message.tags }} alert-auto-dismissible alert-dismissible notification-container text-center"
+                                        role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        {{ message }}
+                                        <br>
+                                        <br>
+                                        <button class="btn btn-primary btn-icon-split" style="width: 100%;"
+                                            onclick=location.href="{% url 'index' %}"> 메인페이지로
+                                            돌아가기 </button>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Answer</h6>
@@ -143,12 +167,15 @@
                                     <p>
                                         infi 계정 비밀번호를 입력하세요
                                     </p>
-                                    <div class="form-group">
-                                        <input type="text" name="answer" class="form-control form-control-user"
-                                            id="answer" placeholder="Enter Answer">
-                                    </div>
-                                    <input type="submit" class="btn btn-success btn-icon-split" style="width: 100%;"
-                                        value="제출">
+                                    <form method="POST" class="answer">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input type="text" name="answer" class="form-control form-control-user"
+                                                id="answer" placeholder="Enter Answer">
+                                        </div>
+                                        <input type="submit" class="btn btn-success btn-icon-split" style="width: 100%;"
+                                            value="제출">
+                                    </form>
                                 </div>
                             </div>
 
@@ -157,16 +184,22 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Flag</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="form-group">
-                                        <p> 정답을 맞추면 Flag 나옴 </p>
-                                        <input type="text" name="flag" class="form-control form-control-user" id="flag"
-                                            placeholder="Enter Flag">
-                                    </div>
-                                    <input type="submit" class="btn btn-primary btn-icon-split" style="width: 100%;"
-                                        value="제출">
+                                    <form method="POST" class="flag">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            {% if flag %}
+                                            <p> {{flag}}</p>
+                                            {% else %}
+                                            <p> 정답을 입력하면 flag가 나타납니다</p>
+                                            {% endif %}
+                                            <input type="text" name="flag" class="form-control form-control-user"
+                                                id="flag" placeholder="Enter Flag">
+                                        </div>
+                                        <input type="submit" class="btn btn-primary btn-icon-split" style="width: 100%;"
+                                            value="제출">
+                                    </form>
                                 </div>
                             </div>
-
                         </div>
 
                     </div>
