@@ -5,11 +5,10 @@ from django.shortcuts import render, redirect
 
 
 def signup(request):
-    print(request.method)
     if request.method == 'POST':
         if request.POST['password1'] == request.POST['password2']:
             user = User.objects.create_user(
-                email=request.POST['email'],
+                # email=request.POST['email'],
                 username=request.POST['username'],
                 password=request.POST['password1']
             )
@@ -27,6 +26,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             return redirect('main/index')
+            # return render(request, 'main/index.html', {'username': username})
         else:
             return render(request, 'user/login.html', {'error': 'username or password is incorrect.'})
     else:
