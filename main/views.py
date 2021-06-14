@@ -164,12 +164,13 @@ def problem5(request):
 
     return render(request, 'main/problem5.html', {'score': p5_info.score, 'username': request.user})
 
+
 def problem6(request):
     p6_info = Problem.objects.filter(num=6)
     p6_info = p6_info[0]
     if request.method == 'POST':
         if request.POST.get('answer') and request.POST['answer'] == p6_info.answer:
-            return render(request, 'main/problem4.html', {'score': p6_info.score, 'flag': p6_info.flag})
+            return render(request, 'main/problem6.html', {'score': p6_info.score, 'flag': p6_info.flag})
         elif request.POST.get('flag') and request.POST['flag'] == p6_info.flag:
             messages.success(
                 request, 'Congratulations!! You got point +' + str(p6_info.score))
@@ -184,7 +185,6 @@ def problem6(request):
             my_score = 0
             for p in problems:
                 my_score += p.score
-            print(my_score)
             return HttpResponseRedirect('/main/problem6')
         else:
             return render(request, 'main/problem6.html', {'score': p6_info.score, 'flag': "오답입니다", 'username': request.user})
